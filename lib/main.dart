@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.dark, // <== on choisit le Dark
+      home: const HomePage(),
     );
   }
 }
