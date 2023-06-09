@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         // <== définit le thème Dark
         brightness: Brightness.dark,
       ),
-      themeMode: ThemeMode.dark, // <== on choisit le Dark
+      themeMode: ThemeMode.light, // <== on choisit le Dark
       home: const HomePage(),
     );
   }
@@ -27,15 +27,53 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MyApp'),
+        title: const Text('QuizWiz', style: TextStyle(color: Colors.white, fontSize: 24)),
+        backgroundColor: const Color.fromARGB(206, 237, 66, 100),
       ),
-      body: const Center(
-        child: Text('Hello World'),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('../assets/background_mainpage.jpg'),
+            fit: BoxFit.contain,
+          ),
+        ),
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 0, 121, 191),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: const [
+                  Text(
+                    'Contenu de l\'application',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  SizedBox(height: 30, width: 8),
+                  Text(
+                    'Description du contenu',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
 }
+
+
+
+          // decoration: BoxDecoration(
+          //   color: Colors.green.withOpacity(0.6),
+          //   borderRadius: BorderRadius.circular(10),
+          // ),
+          // padding: const EdgeInsets.symmetric(
+          //   horizontal: 100,
+          //   vertical: 70,
+          // ),
