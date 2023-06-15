@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_mobile/quizpage.dart';
 
 void main() => runApp(
       const MyApp(),
@@ -20,13 +21,27 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       themeMode: ThemeMode.light, // <== on choisit le Dark
-      home: const HomePage(),
+      initialRoute: PageName.home,
+      routes: {
+      PageName.home: (context) => const HomePage(),
+      PageName.quizpage: (context) => const QuizPage(),
+      },
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+void goToQuizPage() {
+  Navigator.pushNamed(context, PageName.quizpage);
+}
 
  @override
   Widget build(BuildContext context) {
@@ -45,11 +60,21 @@ class HomePage extends StatelessWidget {
         child: Center(
           child: Container(
             margin: const EdgeInsets.only(bottom: 20), // Ajouter une marge supérieure
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start, // Aligner les enfants en haut
-              children: const [
-                BoxQuiz(),
+              children: [
+                BoxQuiz(
+                  'Minecraft',
+                  'Un phénomène mondial qui a marqué toute une génération de joueurs en ligne!',
+                  () => goToQuizPage(),
+                  ),
+                const SizedBox(height: 20), // Ajouter un espace entre les deux boîtes
+                BoxQuiz(
+                  'Sonic', 
+                  'La mascotte de SEGA qui a su révaliser Mario!',
+                  () => goToQuizPage(),
+                ),
               ],
             ),
           ),
@@ -60,45 +85,50 @@ class HomePage extends StatelessWidget {
 }
 
 class BoxQuiz extends StatelessWidget {
-  const BoxQuiz({super.key});
+  // ignore: use_key_in_widget_constructors, prefer_const_constructors_in_immutables
+  BoxQuiz(
+    this.title,
+    this.description,
+    this.onTap, 
+  );
+
+  final String title;
+  final String description;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return InkWell(
+      onTap : onTap,
+      child : Container(
+        decoration: BoxDecoration(
         color: const Color.fromARGB(255, 0, 121, 191), // Utiliser la couleur hexadécimale spécifiée
         borderRadius: BorderRadius.circular(10),
-      ),            
-      width: 300,
-      height: 100,
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            'Minecraft',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          SizedBox(height: 10),
-          Text(
-            'Un phénomène mondial qui a marqué toute une génération de joueurs!.',
-            style: TextStyle(color: Colors.white, fontSize: 14),
-          ),
-        ],
+        ),            
+        width: 300,
+        height: 100,
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:  [
+            Text(
+              title,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              description,
+              style: const TextStyle(color: Colors.white, fontSize: 14),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 
-
-          // decoration: BoxDecoration(
-          //   color: Colors.green.withOpacity(0.6),
-          //   borderRadius: BorderRadius.circular(10),
-          // ),
-          // padding: const EdgeInsets.symmetric(
-          //   horizontal: 100,
-          //   vertical: 70,
-          // ),
-
-          // const Color.fromARGB(255, 0, 121, 191),
+class PageName {
+ static const String home = '/';
+ static const String quizpage = '/quizpage';
+}
