@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QuizWiz', style: TextStyle(color: Colors.white, fontSize: 24), textAlign: TextAlign.center),
+        title: const Text('QuizWiz', style: TextStyle(color: Colors.white, fontSize: 24)),
         backgroundColor: const Color.fromARGB(206, 237, 66, 100),
       ),
       body: Container(
