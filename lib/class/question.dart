@@ -5,15 +5,21 @@ class Question {
   final String question;
   final String type;
   List<String> answers;
-  
+
   Question(
     this.id,
     this.question,
     this.type,
     this.answers,
-  )  : assert(answers.length >= 1, 'La question doit avoir au moins une réponse.'),
-      assert(type == 'QCM' && answers.length == 4 || type == 'RC' && answers.length >= 1 && answers.length <= 2,
-            'Le nombre de réponses ne correspond pas au type de question.') {
-              answers = answers;
-              }
+  ) {
+    validateAnswers();
+  }
+
+  void validateAnswers() {
+    if (type == 'QCM' && answers.length != 4) {
+      throw ArgumentError('Le type de question QCM nécessite exactement 4 réponses.');
+    } else if (type == 'RC' && (answers.length < 1 || answers.length > 2)) {
+      throw ArgumentError('Le type de question RC nécessite entre 1 et 2 réponses.');
+    }
+  }
 }

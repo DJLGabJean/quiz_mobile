@@ -6,13 +6,19 @@ class Quiz {
   final String description;
   List<Question> questions;
   final VoidCallback onTap;
-  
+
   Quiz(
     this.title,
     this.description,
     this.questions,
-    this.onTap, 
-  ) : assert(questions.length >= 3, 'La liste des questions doit contenir au moins 3 questions.') {
-    questions = questions;
+    this.onTap,
+  ) {
+    validateQuestions(questions);
+  }
+
+  void validateQuestions(List<Question> questions) {
+    if (questions.length < 3) {
+      throw ArgumentError('Le quiz doit contenir au moins 3 questions.');
+    }
   }
 }
