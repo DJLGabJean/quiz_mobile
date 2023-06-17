@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_mobile/classes/question.dart';
+import 'package:quiz_mobile/class/question.dart';
 
 class Quiz {
   final String title;

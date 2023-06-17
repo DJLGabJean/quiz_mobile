@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'package:quiz_mobile/classes/quiz.dart';
-import 'package:quiz_mobile/classes/question.dart';
+import 'package:quiz_mobile/class/quiz.dart';
+import 'package:quiz_mobile/class/question.dart';
 import 'package:quiz_mobile/main.dart';
 
 Quiz minecraftQuiz = Quiz(
