@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_mobile/classes/quiz.dart';
+import 'package:quiz_mobile/models/quizList.dart';
 import 'package:quiz_mobile/quizpage.dart';
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() => runApp(
       const MyApp(),
@@ -11,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // <== définit le thème Light
@@ -39,10 +44,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-void goToQuizPage() {
-  Navigator.pushNamed(context, PageName.quizpage);
-}
-
  @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,17 +65,9 @@ void goToQuizPage() {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start, // Aligner les enfants en haut
               children: [
-                BoxQuiz(
-                  'Minecraft',
-                  'Un phénomène mondial qui a marqué toute une génération de joueurs en ligne!',
-                  () => goToQuizPage(),
-                  ),
-                const SizedBox(height: 20), // Ajouter un espace entre les deux boîtes
-                BoxQuiz(
-                  'Sonic', 
-                  'La mascotte de SEGA qui a su révaliser Mario!',
-                  () => goToQuizPage(),
-                ),
+                BoxQuiz(minecraftQuiz),
+                const SizedBox(height: 20),
+                BoxQuiz(sonicQuiz)
               ],
             ),
           ),
@@ -85,21 +78,17 @@ void goToQuizPage() {
 }
 
 class BoxQuiz extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors, prefer_const_constructors_in_immutables
-  BoxQuiz(
-    this.title,
-    this.description,
-    this.onTap, 
+  final Quiz quiz;
+  
+  const BoxQuiz(
+    this.quiz, 
+    {super.key}
   );
-
-  final String title;
-  final String description;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap : onTap,
+      onTap : quiz.onTap,
       child : Container(
         decoration: BoxDecoration(
         color: const Color.fromARGB(255, 0, 121, 191), // Utiliser la couleur hexadécimale spécifiée
@@ -112,12 +101,12 @@ class BoxQuiz extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
             Text(
-              title,
+              quiz.title,
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             const SizedBox(height: 10),
             Text(
-              description,
+              quiz.description,
               style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
           ],
@@ -126,7 +115,6 @@ class BoxQuiz extends StatelessWidget {
     );
   }
 }
-
 
 class PageName {
  static const String home = '/';
