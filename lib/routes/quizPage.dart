@@ -44,7 +44,18 @@ class _QuizPageState extends State<QuizPage> {
                                         }
                                       }, child: Text(currentQuestion.answers[i].response))]),
           if (currentQuestion.type == 'RC')
-            ElementColumn(widgets: [Text(currentQuestion.question), for (var i = 0; i < currentQuestion.answers.length; i++) ElevatedButton(onPressed: () {}, child: Text(currentQuestion.answers[i].response))]),
+            ElementColumn(widgets: [Text(currentQuestion.question), 
+                                    for (var i = 0; i < currentQuestion.answers.length; i++) 
+                                      ElevatedButton(onPressed: () {
+                                        // Si la réponse est correcte, afficher un message de confirmation
+                                        if (currentQuestion.answers[i].isCorrect == true) {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bonne réponse!')));
+                                        }
+                                        // Sinon, afficher un message d'erreur
+                                        else {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mauvaise réponse!')));
+                                        }
+                                      }, child: Text(currentQuestion.answers[i].response))]),
           // Bouton "Suivant"
           const SizedBox(height: 20),
           ElevatedButton(
