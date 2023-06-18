@@ -43,15 +43,14 @@ class _HomePageState extends State<HomePage> {
  @override
   Widget build(BuildContext context) {
     return const MainPage(fondEcran: DecorationImage(
-      image: AssetImage('assets/images/fondEcran.jpg'),
-      fit: BoxFit.cover,
-    ));
+      image: AssetImage('../assets/background_mainpage.jpg'),
+      fit: BoxFit.cover),
+    );
   }
 }
 
 class PageName {
  static const String home = '/';
  static const String quizpage = '/quizpage';
+
 }
-
-
