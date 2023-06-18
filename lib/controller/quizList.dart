@@ -12,9 +12,6 @@ Quiz minecraftQuiz = Quiz(
     Question(3, "Quel est le thème de la mise à jour Trails & Tales", 'QCM', ["La créativité et l'expression de soi via la représentation et la narration", "L'ajout d'un nouveau biome", "Mise à jour des caves et des falaises", "Mise à jour du Nether"]),
     Question(4, 'Quel est le prénom masculin du personnage principal de Minecraft', 'RC', ["Steve"]),
   ],
-  () {
-    navigatorKey.currentState?.pushNamed(PageName.quizpage);
-  },
 );
 
 Quiz sonicQuiz = Quiz(
@@ -26,7 +23,4 @@ Quiz sonicQuiz = Quiz(
     Question(3, "Pourquoi Sonic est rapide ?", 'QCM', ["Grâce à ses chaussures", "A cause d'une expérience du Dr Robotnik", "A cause d'un accident", "Sanic"]),
     Question(4, 'En quoi se transforme Sonic dans Sonic Unleashed ?', 'RC', ["Loup-garou", "Hérisson-garou"]),
   ],
-  () {
-    navigatorKey.currentState?.pushNamed(PageName.quizpage);
-  },
 );

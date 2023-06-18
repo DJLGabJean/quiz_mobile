@@ -5,13 +5,11 @@ class Quiz {
   final String title;
   final String description;
   List<Question> questions;
-  final VoidCallback onTap;
 
   Quiz(
     this.title,
     this.description,
     this.questions,
-    this.onTap,
   ) {
     validateQuestions(questions);
   }

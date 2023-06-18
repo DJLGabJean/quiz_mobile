@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_mobile/class/quiz.dart';
-import 'package:quiz_mobile/models/quizList.dart';
-import 'package:quiz_mobile/quizpage.dart';
+import 'package:quiz_mobile/controller/quizList.dart';
+import 'package:quiz_mobile/routes/quizPage.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       initialRoute: PageName.home,
       routes: {
       PageName.home: (context) => const HomePage(),
-      PageName.quizpage: (context) => const QuizPage(),
+      PageName.quizpage: (context) => QuizPage(),
       },
     );
   }
@@ -88,7 +88,12 @@ class BoxQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap : quiz.onTap,
+      onTap : (){
+            Navigator.of(context).pushNamed(
+            PageName.quizpage,
+            arguments: quiz.questions,
+            );
+      },
       child : Container(
         decoration: BoxDecoration(
         color: const Color.fromARGB(255, 0, 121, 191), // Utiliser la couleur hexadécimale spécifiée
