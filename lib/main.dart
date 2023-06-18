@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_mobile/controller/quizList.dart';
 import 'package:quiz_mobile/routes/quizPage.dart';
-import 'package:quiz_mobile/widgets/boxQuiz.dart';
+import 'package:quiz_mobile/widgets/mainPage.dart';
 
 void main() => runApp(
       const MyApp(),
@@ -43,34 +42,10 @@ class _HomePageState extends State<HomePage> {
 
  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('QuizWiz', style: TextStyle(color: Colors.white, fontSize: 24)),
-        backgroundColor: const Color.fromARGB(206, 237, 66, 100),
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('../assets/background_mainpage.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 20), // Ajouter une marge supérieure
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start, // Aligner les enfants en haut
-              children: [
-                BoxQuiz(minecraftQuiz),
-                const SizedBox(height: 20),
-                BoxQuiz(sonicQuiz)
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+    return const MainPage(fondEcran: DecorationImage(
+      image: AssetImage('assets/images/fondEcran.jpg'),
+      fit: BoxFit.cover,
+    ));
   }
 }
 
@@ -78,3 +53,5 @@ class PageName {
  static const String home = '/';
  static const String quizpage = '/quizpage';
 }
+
+
