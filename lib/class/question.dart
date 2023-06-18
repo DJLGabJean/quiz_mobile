@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_is_empty
+import 'package:quiz_mobile/class/response.dart';
 
 class Question {
   final int id;
   final String question;
   final String type;
-  List<String> answers;
+  List<Response> answers;
 
   Question(
     this.id,

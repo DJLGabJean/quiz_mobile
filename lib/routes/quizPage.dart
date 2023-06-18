@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:quiz_mobile/class/question.dart';
+import 'package:quiz_mobile/widgets/elementColumn.dart';
 
 class QuizPage extends StatefulWidget {
 
@@ -28,12 +29,22 @@ class _QuizPageState extends State<QuizPage> {
         children: [
           // Afficher le contenu de la question actuelle
           const SizedBox(height: 20),
-          Text(currentQuestion.question),
           // Afficher le widget de réponse approprié en fonction du type de question
-          // if (currentQuestion.type == 'QCM')
-          //   QcmQuestionWidget(currentQuestion),
-          // if (currentQuestion.type == 'RC')
-          //   RcQuestionWidget(currentQuestion),
+          if (currentQuestion.type == 'QCM')
+            ElementColumn(widgets: [ Text(currentQuestion.question), 
+                                     for (var i = 0; i < currentQuestion.answers.length; i++) 
+                                      ElevatedButton(onPressed: () {
+                                        // Si la réponse est correcte, afficher un message de confirmation
+                                        if (currentQuestion.answers[i].isCorrect == true) {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Bonne réponse!')));
+                                        }
+                                        // Sinon, afficher un message d'erreur
+                                        else {
+                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mauvaise réponse!')));
+                                        }
+                                      }, child: Text(currentQuestion.answers[i].response))]),
+          if (currentQuestion.type == 'RC')
+            ElementColumn(widgets: [Text(currentQuestion.question), for (var i = 0; i < currentQuestion.answers.length; i++) ElevatedButton(onPressed: () {}, child: Text(currentQuestion.answers[i].response))]),
           // Bouton "Suivant"
           const SizedBox(height: 20),
           ElevatedButton(
